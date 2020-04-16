@@ -118,6 +118,24 @@ function draw() {
 
 }
 
+ /**************Snake Growth****************/ 
+ if (snakeX == food[0].x && snakeY == food[0].y) {
+    let block = { x: snakeTailX, y: snakeTailY };
+    snake.push(block)
+    let foody = {
+        x: Math.floor(Math.random() * 17 + 1) * box,
+        y: Math.floor(Math.random() * 17 + 1) * box
+    }
+    food.push(foody);
+    food.shift()
+    score++;
+
+}
+
+
+contxt.fillStyle = 'black';
+contxt.fillText(`Score: ${score}`, 500, 500)
+
 
 
 
