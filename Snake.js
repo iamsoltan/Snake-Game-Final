@@ -1,4 +1,4 @@
-let menu = document.getElementById('menuCanvas'); 
+let menu = document.getElementById('menuCanvas');
 let canv = document.getElementById('gameCanvas');
 let contxt = canv.getContext("2d");
 let box = 16;
@@ -21,7 +21,50 @@ MC.fillRect(220, 340, 140, 50);
 MC.font = "20px helvetica";
 MC.strokeText('New Game', 240, 370);
 
+// Making the New Game button Functional
 
+
+document.addEventListener('mousemove', (e) => {
+    let mouseX = e.offsetX;
+    let mouseY = e.offsetY;
+    if (mouseX < 340 && mouseX > 220 && mouseY < 390 && mouseY > 340) {
+        menu.style.cursor = 'pointer'
+
+        MC.fillStyle = 'white';
+        MC.fillRect(220, 340, 140, 50);
+        MC.strokeStyle = 'green'
+        MC.strokeRect(220, 340, 140, 50)
+        MC.font = "20px helvetica";
+        MC.strokeText('New Game', 240, 370);
+    } else {
+        MC.fillStyle = 'white';
+        MC.fillRect(220, 340, 140, 50);
+        menu.style.cursor = 'auto'
+        MC.strokeStyle = 'black'
+        MC.strokeRect(220, 340, 140, 50)
+
+        MC.font = "20px helvetica";
+        MC.strokeText('New Game', 240, 370);
+    }
+})
+
+
+// adding an event on the new game button
+menu.addEventListener('click', e => {
+
+    var mouseX = e.offsetX; // x coordinates of the cursor
+    var mouseY = e.offsetY; // y coordinates of the cursor
+    console.log(mouseX)
+    console.log(mouseY)
+    console.log(e)
+
+    // a condition to verify that the cursor is on the button
+    if (mouseX < 340 && mouseX > 220 && mouseY < 390 && mouseY > 340) {
+        menu.style.display = 'none'
+        canv.style.display = 'block'
+    }
+
+})
 
 /*************************************/
 
@@ -62,7 +105,7 @@ let score = 0;
 
 
 function draw() {
-    /**********Snake body and food drowing*************/ 
+    /**********Snake body and food drowing*************/
     //Drawing background 
     contxt.fillStyle = 'teal'
     contxt.fillRect(0, 0, 608, 550);
@@ -84,7 +127,7 @@ function draw() {
     let snakeY = snake[0].y;
     let snakeTailX = snake[snake.length - 1].x;
     let snakeTailY = snake[snake.length - 1].y;
-    
+
     /***************Snake direction and borders conditions***************/
     //position of new head
     switch (dir) {
@@ -103,15 +146,15 @@ function draw() {
 
     }
     if (snakeX < 0) {
-        snakeX = 19 * 32
+        snakeX = 608
     }
-    if (snakeX > 19 * 32) {
+    if (snakeX > 608) {
         snakeX = 0
     }
     if (snakeY < 0) {
-        snakeY = 17 * 32
+        snakeY = 544
     }
-    if (snakeY > 17 * 32) {
+    if (snakeY > 544) {
         snakeY = 0
     }
     /***********Snake Movement************/
@@ -125,26 +168,26 @@ function draw() {
     }
     snake.unshift(newhead)
 
-}
 
- /**************Snake Growth****************/ 
- if (snakeX == food[0].x && snakeY == food[0].y) {
-    let block = { x: snakeTailX, y: snakeTailY };
-    snake.push(block)
-    let foody = {
-        x: Math.floor(Math.random() * 17 + 1) * box,
-        y: Math.floor(Math.random() * 17 + 1) * box
+
+    /**************Snake Growth****************/
+    if (snakeX == food[0].x && snakeY == food[0].y) {
+        let block = { x: snakeTailX, y: snakeTailY };
+        snake.push(block)
+        let foody = {
+            x: Math.floor(Math.random() * 17 + 1) * box,
+            y: Math.floor(Math.random() * 17 + 1) * box
+        }
+        food.push(foody);
+        food.shift()
+        score++;
+
     }
-    food.push(foody);
-    food.shift()
-    score++;
+    contxt.fillStyle = 'black';
+    contxt.fillText(`Score: ${score}`, 500, 500)
 
-}
 
     /***************GameOver Condition ****************/
-
-
-
 
 
     for (let i = 2; i < snake.length; i++) {
@@ -165,8 +208,6 @@ function draw() {
             if (score > previous) {
                 localStorage.setItem('Highscore', score)
             }
-
-
             clearInterval(game)
         }
     }
@@ -188,15 +229,5 @@ function highscore() {
 
     contxt.fillText(`Highest-Score: ${max}`, 400, 500)
 }
-var game = setInterval(draw, 60)
-var hs = setInterval(highscore, 60)
-
-
-contxt.fillStyle = 'black';
-contxt.fillText(`Score: ${score}`, 500, 500)
-
-
-
-
 var game = setInterval(draw, 60)
 var hs = setInterval(highscore, 60)
