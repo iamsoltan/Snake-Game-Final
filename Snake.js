@@ -114,6 +114,16 @@ function draw() {
     if (snakeY > 17 * 32) {
         snakeY = 0
     }
+    /***********Snake Movement************/
+    //Removing the old head block
+    snake.pop()
+
+    // adding a new head block
+    let newhead = {
+        x: snakeX,
+        y: snakeY
+    }
+    snake.unshift(newhead)
 
 }
 
