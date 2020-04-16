@@ -118,6 +118,74 @@ function draw() {
 
 }
 
+ /**************Snake Growth****************/ 
+ if (snakeX == food[0].x && snakeY == food[0].y) {
+    let block = { x: snakeTailX, y: snakeTailY };
+    snake.push(block)
+    let foody = {
+        x: Math.floor(Math.random() * 17 + 1) * box,
+        y: Math.floor(Math.random() * 17 + 1) * box
+    }
+    food.push(foody);
+    food.shift()
+    score++;
+
+}
+
+    /***************GameOver Condition ****************/
+
+
+
+
+
+    for (let i = 2; i < snake.length; i++) {
+        if (newhead.x == snake[i].x && newhead.y == snake[i].y) {
+
+
+            //Drawing Gameover screen
+            contxt.fillStyle = '#bb0020'
+            contxt.fillRect(0, 0, 608, 550);
+
+            contxt.font = '40px Helvetica'
+            contxt.fillStyle = 'black';
+            contxt.fillText('Game Over', 180, 250)
+            contxt.font = '20px Helvetica'
+            contxt.fillText('Refresh the page to play again', 150, 300)
+
+            let previous = localStorage.getItem('Highscore')
+            if (score > previous) {
+                localStorage.setItem('Highscore', score)
+            }
+
+
+            clearInterval(game)
+        }
+    }
+
+}
+
+function highscore() {
+    let High
+    if (localStorage.length == 0) {
+        High = 0;
+    } else {
+        High = localStorage.getItem('Highscore')
+    }
+
+    let max = 0;
+    if (High > max) {
+        max = High
+    }
+
+    contxt.fillText(`Highest-Score: ${max}`, 400, 500)
+}
+var game = setInterval(draw, 60)
+var hs = setInterval(highscore, 60)
+
+
+contxt.fillStyle = 'black';
+contxt.fillText(`Score: ${score}`, 500, 500)
+
 
 
 
