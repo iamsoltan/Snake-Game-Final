@@ -1,4 +1,4 @@
-let menu = document.getElementById('menuCanvas'); //Oussema
+let menu = document.getElementById('menuCanvas'); 
 let canv = document.getElementById('gameCanvas');
 let contxt = canv.getContext("2d");
 let box = 16;
@@ -55,14 +55,14 @@ snake[1] = {
 }
 let food = []
 food[0] = {
-    x: Math.floor(Math.random() * 17 + 3) * box,
+    x: Math.floor(Math.random() * 17 + 1) * box,
     y: Math.floor(Math.random() * 17 + 1) * box
 }
 let score = 0;
 
 
 function draw() {
-    /**********Snake body and food drowing*************/ //Oussema
+    /**********Snake body and food drowing*************/ 
     //Drawing background 
     contxt.fillStyle = 'teal'
     contxt.fillRect(0, 0, 608, 550);
@@ -104,15 +104,15 @@ function draw() {
 
     }
     if (snakeX < 0) {
-        snakeX = 19 * 32
+        snakeX = 608
     }
-    if (snakeX > 19 * 32) {
+    if (snakeX > 608) {
         snakeX = 0
     }
     if (snakeY < 0) {
-        snakeY = 17 * 32
+        snakeY = 544
     }
-    if (snakeY > 17 * 32) {
+    if (snakeY > 544) {
         snakeY = 0
     }
 
