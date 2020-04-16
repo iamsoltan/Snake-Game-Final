@@ -85,8 +85,7 @@ function draw() {
     let snakeTailX = snake[snake.length - 1].x;
     let snakeTailY = snake[snake.length - 1].y;
     
-     /***************Snake direction and borders conditions***************/
-
+    /***************Snake direction and borders conditions***************/
     //position of new head
     switch (dir) {
         case 'LEFT':
@@ -104,17 +103,27 @@ function draw() {
 
     }
     if (snakeX < 0) {
-        snakeX = 608
+        snakeX = 19 * 32
     }
-    if (snakeX > 608) {
+    if (snakeX > 19 * 32) {
         snakeX = 0
     }
     if (snakeY < 0) {
-        snakeY = 544
+        snakeY = 17 * 32
     }
-    if (snakeY > 544) {
+    if (snakeY > 17 * 32) {
         snakeY = 0
     }
+    /***********Snake Movement************/
+    //Removing the old head block
+    snake.pop()
+
+    // adding a new head block
+    let newhead = {
+        x: snakeX,
+        y: snakeY
+    }
+    snake.unshift(newhead)
 
 }
 
