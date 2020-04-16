@@ -85,36 +85,6 @@ function draw() {
     let snakeTailX = snake[snake.length - 1].x;
     let snakeTailY = snake[snake.length - 1].y;
     
-     /***************Snake direction and borders conditions***************/
-
-    //position of new head
-    switch (dir) {
-        case 'LEFT':
-            snakeX -= box
-            break;
-        case 'UP':
-            snakeY -= box
-            break;
-        case 'RIGHT':
-            snakeX += box
-            break;
-        case 'DOWN':
-            snakeY += box
-            break;
-
-    }
-    if (snakeX < 0) {
-        snakeX = 608
-    }
-    if (snakeX > 608) {
-        snakeX = 0
-    }
-    if (snakeY < 0) {
-        snakeY = 544
-    }
-    if (snakeY > 544) {
-        snakeY = 0
-    }
 
 }
 
